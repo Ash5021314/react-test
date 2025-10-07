@@ -27,7 +27,7 @@ export default function Basket() {
         document.querySelector('.basket span').innerHTML = basketTotalCount;
     }
 
-    function addBasketCount(id, newQuantity) {
+    function addBasketCount(id, newQuantity,ind) {
         basketTotalCount = basketTotalCount + 1;
         setItemInLocalstorage('totalItems', JSON.stringify(basketTotalCount))
         document.querySelector('.basket span').innerHTML = basketTotalCount;
@@ -38,6 +38,8 @@ export default function Basket() {
                 item.id === id ? { ...item, quantity: newQuantity} : item
             )
         )
+        ind.nextElementSibling.value = Number(ind.nextElementSibling.value) + 1
+
     }
 
     function decreesBasketItem(id) {
@@ -69,7 +71,7 @@ export default function Basket() {
                                 </Card.Text>
 
                                 <Form className='d-flex justify-content-between'>
-                                    <Button onClick={() => addBasketCount(item.id, item.quantity +1 )} variant="outline-dark">+</Button>
+                                    <Button onClick={(e)=>{addBasketCount(item.id, item.quantity +1,e.currentTarget)}} variant="outline-dark">+</Button>
                                     <Form.Control
                                         type="text"
                                         className="mx-5 quantity"
